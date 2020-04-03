@@ -6,14 +6,14 @@ USERNAME=$(getent passwd $PUID | cut -d: -f1)
 
 if [ ! $GROUPNAME ]
 then
-        addgroup -g $PGID <groupname>
-        GROUPNAME=<groupname>
+        addgroup -g $PGID ombi
+        GROUPNAME=ombi
 fi
 
 if [ ! $USERNAME ]
 then
-        adduser -G $GROUPNAME -u $PUID -D <username>
-        USERNAME=<username>
+        adduser -G $GROUPNAME -u $PUID -D ombi
+        USERNAME=ombi
 fi
 
-su $USERNAME -c ''
+su $USERNAME -c '/opt/ombi/Ombi'

@@ -11,10 +11,17 @@ for arch in ${build_architectures[@]}; do
   echo "✅ building $arch"
   echo "⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯"
 
+  OMBI_ARCH=${ombi_arch_map[${arch}]}
+  OMBI_RELEASE=$(curl -sX GET "https://api.github.com/repos/tidusjar/Ombi/releases" | jq -r '.[0] | .tag_name');
+  OMBI_URL=$(curl -k -s "https://api.github.com/repos/tidusjar/Ombi/releases/tags/${OMBI_RELEASE}" | jq -r '.assets[].browser_download_url' | grep ${OMBI_ARCH})
+
   docker exec docker_daemon docker build \
     --squash \
     --platform=${docker_arch_map[${arch}]} \
     --build-arg BASE_IMAGE_PREFIX=${base_image_prefix_map[${arch}]} \
+    --build-arg OMBI_RELEASE=${OMBI_RELEASE} \
+    --build-arg OMBI_ARCH=${OMBI_ARCH} \
+    --build-arg JACKETT_URL=${OMBI_URL} \
     --file /build/$DOCKERFILE_PATH \
     --tag "${IMAGE_NAME}-${arch}"  \
     /build
