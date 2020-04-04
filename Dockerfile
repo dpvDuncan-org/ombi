@@ -11,6 +11,7 @@ COPY --from=qemu /usr/bin/qemu-*-static /usr/bin/
 
 ENV PUID=0
 ENV PGID=0
+ENV HOME="/config"
 
 COPY scripts/start.sh /
 
