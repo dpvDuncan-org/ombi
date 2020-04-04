@@ -1,5 +1,5 @@
 #! /bin/sh
-chown -R $PUID:$PGID /config
+chown -R $PUID:$PGID /config /opt/ombi
 
 GROUPNAME=$(getent group $PGID | cut -d: -f1)
 USERNAME=$(getent passwd $PUID | cut -d: -f1)
@@ -16,4 +16,4 @@ then
         USERNAME=ombi
 fi
 
-su $USERNAME -c '/opt/ombi/Ombi'
+su $USERNAME -c '/opt/ombi/Ombi --storage "/config"'

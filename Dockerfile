@@ -20,7 +20,7 @@ RUN apk add --no-cache --virtual=.build-dependencies ca-certificates curl
 
 RUN mkdir -p /opt/ombi /config
 RUN curl -o - -L "${OMBI_URL}" | tar xz -C /opt/ombi --strip-components=1
-RUN chmod -R 777 /start.sh /config
+RUN chmod -R 777 /start.sh /config /opt/ombi/Ombi
 
 RUN rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/* /usr/bin/qemu-*-static
 
