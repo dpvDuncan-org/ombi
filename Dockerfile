@@ -20,7 +20,7 @@ RUN apk add --no-cache icu-dev libunwind curl-dev
 RUN apk add --no-cache --virtual=.build-dependencies ca-certificates curl
 
 RUN mkdir -p /opt/ombi /config
-RUN curl -o - -L "${OMBI_URL}" | tar xz -C /opt/ombi --strip-components=1
+RUN curl -o - -L "${OMBI_URL}" | tar xz -C /opt/ombi/
 RUN chmod -R 777 /start.sh /config /opt/ombi
 
 RUN rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/* /usr/bin/qemu-*-static
