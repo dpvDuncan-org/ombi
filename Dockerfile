@@ -26,7 +26,7 @@ RUN chmod -R 777 /start.sh /config /opt/ombi
 RUN rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/* /usr/bin/qemu-*-static
 
 # ports and volumes
-EXPOSE 3579
+EXPOSE 5000
 VOLUME /config
 
 CMD ["/start.sh"]
