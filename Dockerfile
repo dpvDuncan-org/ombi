@@ -13,7 +13,8 @@ ENV HOME="/config"
 COPY scripts/start.sh /
 
 RUN apk -U --no-cache upgrade
-RUN apk add --no-cache icu-dev libunwind curl-dev gcompat libc6-compat
+#RUN apk add --no-cache icu-dev libunwind curl-dev gcompat libc6-compat
+RUN apk add --no-cache libstdc++ icu-libs libintl libssl1.0
 RUN apk add --no-cache --virtual=.build-dependencies ca-certificates curl
 
 RUN mkdir -p /opt/ombi /config
