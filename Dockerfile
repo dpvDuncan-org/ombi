@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-FROM mcr.microsoft.com/dotnet/sdk:6.0-alpine AS builder
+FROM mcr.microsoft.com/dotnet/sdk:6.0-alpine-amd64 AS builder
 
 ARG OMBI_RELEASE
 ARG OMBI_URL
