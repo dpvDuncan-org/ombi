@@ -12,8 +12,10 @@ for arch in ${build_architectures[@]}; do
   echo "⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯"
 
   OMBI_ARCH=${ombi_arch_map[${arch}]}
-  OMBI_RELEASE=$(curl -s https://api.github.com/repos/Ombi-app/Ombi/releases/latest | jq -r '.tag_name')
-  OMBI_URL=$(curl -k -s https://api.github.com/repos/Ombi-app/Ombi/releases/tags/${OMBI_RELEASE} | jq -r '.assets[].browser_download_url' | grep linux-${OMBI_ARCH}.tar.gz)
+  # OMBI_RELEASE=$(curl -s https://api.github.com/repos/Ombi-app/Ombi/releases/latest | jq -r '.tag_name')
+  OMBI_RELEASE=$(curl -s https://api.github.com/repos/Ombi-app/Ombi/releases | jq -r '.[0].tag_name')
+  # OMBI_URL=$(curl -k -s https://api.github.com/repos/Ombi-app/Ombi/releases/tags/${OMBI_RELEASE} | jq -r '.assets[].browser_download_url' | grep linux-${OMBI_ARCH}.tar.gz)
+  OMBI_URL=$(curl -k -s https://api.github.com/repos/Ombi-app/Ombi/releases/tags/${OMBI_RELEASE} | jq -r '.tarball_url')
 
   echo OMBI_URL = ${OMBI_URL}
   docker exec docker_daemon docker build \
