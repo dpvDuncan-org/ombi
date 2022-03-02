@@ -16,4 +16,4 @@ then
         USERNAME=ombi
 fi
 
-su $USERNAME -c '/opt/ombi/Ombi --storage "/config"'
+su $USERNAME -c 'cd /opt/ombi && ./Ombi --storage "/config"'
